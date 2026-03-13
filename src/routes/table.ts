@@ -80,11 +80,11 @@ export async function tableRoute(req: HandlerRequest) {
     (k) => page.recordMap.collection_view[k]
   )[0];
 
-  const { rows } = await getTableData(
+  const { schema, rows } = await getTableData(
     collection,
     collectionView.value.id,
     req.notionToken
   );
 
-  return createResponse(rows);
+  return createResponse({ schema, rows });
 }
