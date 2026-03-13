@@ -24,7 +24,10 @@ export const getTableData = async (
   const collectionColKeys = Object.keys(collectionRows);
 
   const tableArr: RowType[] = table.result.reducerResults.collection_group_results.blockIds.map(
-    (id: string) => table.recordMap.block[id]
+    (id: string) => {
+      const _ = table.recordMap.block[id]
+      return (_?.value ? _.value : _) as RowType;
+    }
   );
 
   const tableData = tableArr.filter(
